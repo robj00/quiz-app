@@ -15,7 +15,7 @@ function startListener () {
 function submitListener () {
 	console.log('submit listener started');
 	console.log($('input.button'));
-	$('input.button').click(function () {
+	$('.question').submit(function (event) {
 		event.preventDefault();
 		$('input.button').addClass('hidden');
 		gradeQuestion();
@@ -26,7 +26,7 @@ function submitListener () {
 //listener function for continue button
 function continueListener () {
 	console.log('continue listener started');
-	$('.continue').click(function() {
+	$('.continue').click(function(event) {
 		$('.answer').addClass('hidden').children().remove();
 		$('.questions').addClass('hidden').children().remove();
 		if (state.place == state.total){
@@ -70,15 +70,14 @@ function questions (question, choiceArray, answerKey){
 //function to display questions
 function displayQuestion () {
 	console.log('displayQuestion function started');
-	//why can't I slect by class???
 	$('.questions').removeClass('hidden');
 	var renderHTML = '<h2>Question Number ' + state.place + ' of ' + state.total + '</h2>' +
 		'<h3>' + state.correct + ' correct, ' + state.incorrect + ' incorrect</h3>' +
     '<form action = \'\' class="question">' + questionArray[state.place-1].question + 
-    '<br> <br> <input class="choice" type= "radio" name="answer" value = 0>' + questionArray[state.place-1].choiceArray[0] +
-    '<br> <input class="choice" type="radio" name="answer" value = 1>' + questionArray[state.place-1].choiceArray[1] +
-    '<br> <input class="choice" type="radio" name="answer" value = 2>' + questionArray[state.place-1].choiceArray[2] +
-    '<br> <input class="choice" type= "radio" name="answer" value = 3>' + questionArray[state.place-1].choiceArray[3] +
+    '<br> <br> <label><input class="choice" type= "radio" name="answer" value = 0>&ensp;' + questionArray[state.place-1].choiceArray[0] + '</label>' +
+    '<br> <input class="choice" type="radio" name="answer" value = 1>&ensp;' + questionArray[state.place-1].choiceArray[1] +
+    '<br> <input class="choice" type="radio" name="answer" value = 2>&ensp;' + questionArray[state.place-1].choiceArray[2] +
+    '<br> <input class="choice" type= "radio" name="answer" value = 3>&ensp;' + questionArray[state.place-1].choiceArray[3] +
     '<br> <br> <input class="button" type="submit" value="Submit"> </form>';
     $('.questions').append(renderHTML);
 	submitListener();
