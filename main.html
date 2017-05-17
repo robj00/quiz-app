@@ -9,95 +9,18 @@
   <link rel="stylesheet" href="main.css">
 </head>
 <body>
-<div class='container'>
-  <h1>Company Orientation Quiz
-  </h1>
-  <button class ='button'>
-    <span class = 'button-label start'>Start</span>
-  </button>
-</div>
-<div class="container">
-<h2>Question Number 1 of 10</h2>
-<h3>0 correct, 0 incorrect</h3>
-  <form action = '' class="question">What product/service does our Company offer to customers?<br>
-    <input class='choice' type= 'radio' name='answer' value = 0> Gives them reliable transportation that we stand behind<br>
-    <input class='choice' type= 'radio' name='answer' value = 1> Access to financing which may be difficult for them to obtain<br>
-    <input class='choice' type= 'radio' name='answer' value = 2> The opportunity to establish good credit with on-time payments<br>
-    <input class='choice' type= 'radio' name='answer' value = 3> All of the above<br>
-    <input class="button" type="submit" value="Submit">
-  </form>
-</div>
-<div>
-  <H4>Incorrect, the correct answer is:<br>All of the above</H4>
-  <button class="button-label">
-    <span class="button-label continue">Continue</span>
-  </button>
-</div>
-<div class="end-summary">
-  <h2>Quiz Complete</h2>
-  <p>Your final score was 9 correct out to 10 questions</p>
-   <button class="button-label">
-    <span class="button-label restart">Restart quiz</span>
-  </button>
-
-</div>
-
-  <!-- <div class="container">
-    <h1>Shopping List</h1>
-
-    <form id="js-shopping-list-form">
-      <label for="shopping-list-entry">Add an item</label>
-      <input type="text" name="shopping-list-entry" id="shopping-list-entry" placeholder="e.g., broccoli">
-      <button type="submit">Add item</button>
-    </form>
-
-    <ul class="shopping-list">
-      <li>
-        <span class="shopping-item">apples</span>
-        <div class="shopping-item-controls">
-          <button class="shopping-item-toggle">
-            <span class="button-label">check</span>
-          </button>
-          <button class="shopping-item-delete">
-            <span class="button-label">delete</span>
-          </button>
-        </div>
-      </li>
-      <li>
-        <span class="shopping-item">oranges</span>
-        <div class="shopping-item-controls">
-          <button class="shopping-item-toggle">
-            <span class="button-label">check</span>
-          </button>
-          <button class="shopping-item-delete">
-            <span class="button-label">delete</span>
-          </button>
-        </div>
-      </li>
-      <li>
-        <span class="shopping-item shopping-item__checked">milk</span>
-        <div class="shopping-item-controls">
-          <button class="shopping-item-toggle">
-            <span class="button-label">check</span>
-          </button>
-          <button class="shopping-item-delete">
-            <span class="button-label">delete</span>
-          </button>
-        </div>
-      </li>
-      <li>
-        <span class="shopping-item">bread</span>
-        <div class="shopping-item-controls">
-          <button class="shopping-item-toggle">
-            <span class="button-label">check</span>
-          </button>
-          <button class="shopping-item-delete">
-            <span class="button-label">delete</span>
-          </button>
-        </div>
-      </li>
-    </ul>
-  </div> -->
+  <div class='container'>
+    <h1>Company Orientation Quiz</h1>
+    <button class ='button js-start-section hidden'>
+      <span class = 'button-label start'>Start</span>
+    </button>
+  </div>
+  <div class='questions hidden'>
+  </div>
+  <div class='answer hidden'>
+  </div>
+  <div class="end hidden">
+  </div>
   <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
   <script type="text/javascript" src='app.js'></script>
 </body>
