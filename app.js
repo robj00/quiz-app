@@ -14,8 +14,12 @@ function startListener () {
 //listener function for submit button and answer put is right answer and displays
 function submitListener () {
 	console.log('submit listener started');
-	console.log($('form .question'));
-	$('form .question').submit(gradeQuestion);
+	console.log($('input.button'));
+	$('input.button').click(function () {
+		event.preventDefault();
+		$('input.button').addClass('hidden');
+		gradeQuestion();
+	});
 }
 
 
@@ -23,8 +27,8 @@ function submitListener () {
 function continueListener () {
 	console.log('continue listener started');
 	$('.continue').click(function() {
-		$('.answer').addClass('hidden');
-		$('.questions').addClass('hidden');
+		$('.answer').addClass('hidden').children().remove();
+		$('.questions').addClass('hidden').children().remove();
 		if (state.place == state.total){
 			// they would be done with the last question
 			lastPageDisplay();
@@ -77,6 +81,7 @@ function displayQuestion () {
     '<br> <input class="choice" type= "radio" name="answer" value = 3>' + questionArray[state.place-1].choiceArray[3] +
     '<br> <br> <input class="button" type="submit" value="Submit"> </form>';
     $('.questions').append(renderHTML);
+	submitListener();
 }
 
 //function to display if correct or incorrect
@@ -84,9 +89,11 @@ function gradeQuestion () {
 	var gradeHTML
 	console.log('gradeQuestion started');
 	//how do I get the form choice/value?
-	var choice = $("input[type=radio][name=answer]:checked").value();
+	var choice = $("input[type=radio][name=answer]:checked").val();
 	var answer = questionArray[state.place-1].answerKey;
-	if (choice = answer) {
+	console.log(choice + 'choice');
+	console.log(answer + 'answer');
+	if (choice == answer) {
 		state.correct ++;
 		gradeHTML = '<H4>Correct, nice job!</H4>';
 	}else{
@@ -95,22 +102,24 @@ function gradeQuestion () {
 		questionArray[state.place-1].choiceArray[answer] + '</H4>';
 
 	}
-	$('.questions').addClass('hidden');
 	$('.answer').removeClass('hidden');
 	$('.answer').append(gradeHTML + '<br><button class="button-label continue">' +
       '<span class="button-label">Continue</span> </button>');
+	continueListener();
 
 }
 //function to display last page
 function lastPageDisplay () {
 	$('.end').removeClass('hidden');
 	var endHTML = '<h2>Quiz Complete</h2> <p>Your final score was '+
-	state.correct + ' out of ' + state.total + 'questions</p>' +
+	state.correct + ' out of ' + state.total + ' questions correct</p>' +
 	'<button class="button-label restart">' +
 		'<span class="button-label">Restart quiz</span></button>';
-		$('.end').append(endHTML);
- }
+	$('.end').append(endHTML);
+	restartQuizListener();
 
+ }
+// \\tried to "escape quotes in questions 6 and others, displays weirdly Questio 8 + 10"
 
 var question1 = questions('What product/service does our Company offer to customers?',
  	['Gives them reliable transportation that we stand behind',
@@ -133,19 +142,19 @@ var question5 = questions('What is the primary consideration of our vehicle insp
 	'The safe operation of the vehicle'], 3);
 var question6 = questions('When a vehicle is sold, what is the primary consideration(s)?', 
 	['That we maximize our profit','Ensuring the customer loves the color of the vehicle',
-	'Getting the customer to say “Yes”','Ensuring the vehicle meets the customer’s transportation \
+	'Getting the customer to say \“Yes\”','Ensuring the vehicle meets the customer\’s transportation \
 	needs and that they can afford it'], 3);
 var question7 = questions('What one key goal with review the final sale paperwork with customers?', 
 	['Ensuring they understand all parts of the transaction','Getting through it as quickly as possible',
 	'Just making sure they sign where is needed','Presenting the deal in the best way possible'], 0);
-var question8 = questions('In the Finance Company’s collection process, what is the principle manner of collecting?', 
+var question8 = questions('In the Finance Company\’s collection process, what is the principle manner of collecting?', 
 	['Threatening the customers that they must pay','Shaming them to make them feel bad about themselves',
 	'Remind them of their commitment and the benefits of paying','Repossessing their vehicle'], 2);
 var question9 = questions('When a customer has a major mechanical breakdown and emotionally calls \
 	Service, what is the best response service should give?', ['Tell the customer it is not our fault',
 	'Apologize that they are inconvenienced and schedule them into Service ASAP','Get emotional back to them',
 	'Recommend an outside service shop to repair the vehicle'], 1);
-var question10 = questions('If someone we know or meet outside of work asks what we Company “does,” what \
+var question10 = questions('If someone we know or meet outside of work asks what we Company \“does,\” what \
 	is the best and most descriptive answer?',['We sell cars','We finance vehicles','We service vehicles',
 	'We provide a Program to help customers get a vehicle with a warranty, and financing \
 	which gives them the opportunity to establish a good credit history'], 3);
@@ -166,6 +175,4 @@ beginQuiz();
 
 $(function () {
 	startListener();
-	submitListener();
-	continueListener();
 });

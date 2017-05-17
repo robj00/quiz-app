@@ -16,6 +16,7 @@ button:hover {
 
 .hidden {
   visibility: hidden;
+  display: none;
 }
 
 /*#shopping-list-item {
